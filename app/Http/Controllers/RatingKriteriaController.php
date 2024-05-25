@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\RatingKriteria;
+use App\Models\Alternatif;
+use App\Models\Kriteria;
 use Illuminate\Http\Request;
 
 class RatingKriteriaController extends Controller
@@ -33,7 +35,19 @@ class RatingKriteriaController extends Controller
             'nilai' => 'required',
         ]);
 
-        RatingKriteria::create($request->all());
+        // Ambil nilai alternatif berdasarkan ID yang diterima dari request
+        $alternatif = Alternatif::findOrFail($request->id_alternatif);
+
+        // Ambil nilai kriteria berdasarkan ID yang diterima dari request
+        $kriteria = Kriteria::findOrFail($request->id_kriteria);
+
+        // Simpan nilai dari model Alternatif ke dalam model RatingKriteria
+        RatingKriteria::create([
+            'id_alternatif' => $request->id_alternatif,
+            'id_kriteria' => $request->id_kriteria,
+            'nilai' => $alternatif->getAttributeValue('nilai_' . strtolower($kriteria->nama_kriteria)), // Ambil nilai dari kolom yang sesuai dengan nama kriteria
+        ]);
+
         return redirect()->route('rating_kriteria.index')
             ->with('success', 'Rating kriteria created successfully.');
     }

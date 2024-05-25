@@ -18,6 +18,7 @@ use App\Http\Controllers\JadwalKirimController;
 use App\Http\Controllers\NormalisasiController;
 use App\Http\Controllers\HasilSawController;
 use App\Http\Controllers\SawController;
+use App\Http\Controllers\DashboardController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -71,3 +72,9 @@ Route::get('/saw', [SAWController::class, 'index']);
 Route::get('/saw-results', [SawController::class, 'index'])->name('saw.results');
 
 Route::post('/normalisasi/hitung', [NormalisasiController::class, 'hitungNormalisasi'])->name('hitung-normalisasi');
+
+// Route untuk menampilkan dashboard dengan hasil SAW
+Route::get('/dashboard', [DashboardController::class, 'showSawResults'])->name('dashboard.saw');
+
+
+

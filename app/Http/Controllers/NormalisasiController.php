@@ -82,15 +82,23 @@ class NormalisasiController extends Controller
             'nilai_normalisasi' => 'required'
         ]);
 
-        $normalisasi->update($request->all());
-        return redirect()->route('normalisasi.index')->with('success', 'Normalisasi updated successfully.');
+        try {
+            $normalisasi->update($request->all());
+            return redirect()->route('normalisasi.index')->with('success', 'Normalisasi updated successfully.');
+        } catch (\Exception $e) {
+            return redirect()->route('normalisasi.index')->with('error', 'Failed to update normalisation data.');
+        }
     }
 
     // Fungsi untuk menghapus data normalisasi
     public function destroy(Normalisasi $normalisasi)
     {
-        $normalisasi->delete();
-        return redirect()->route('normalisasi.index')->with('success', 'Normalisasi deleted successfully.');
+        try {
+            $normalisasi->delete();
+            return redirect()->route('normalisasi.index')->with('success', 'Normalisasi deleted successfully.');
+        } catch (\Exception $e) {
+            return redirect()->route('normalisasi.index')->with('error', 'Failed to delete normalisation data.');
+        }
     }
 
     public function hitungNormalisasi()
@@ -106,19 +114,24 @@ class NormalisasiController extends Controller
     
         try {
             // Hitung dan simpan normalisasi
-            foreach ($alternatifs as $alternatif) {
-                foreach ($kriterias as $kriteria) {
+            foreach ($kriterias as $kriteria) {
+                // Ambil nilai maksimum dan minimum untuk kriteria saat ini
+                $maxValue = $kriteria->max;
+                $minValue = $kriteria->min;
+    
+                foreach ($alternatifs as $alternatif) {
                     // Ambil rating kriteria untuk alternatif saat ini
                     $ratingKriteria = RatingKriteria::where('id_alternatif', $alternatif->id_alternatif)
                                                      ->where('id_kriteria', $kriteria->id_kriteria)
                                                      ->first();
-                                                     if ($kriteria->max - $kriteria->min != 0) {
-                                                        $nilaiNormalisasi = ($ratingKriteria->nilai - $kriteria->min) / ($kriteria->max - $kriteria->min);
-                                                        $nilaiNormalisasi = max(0, $nilaiNormalisasi);
-                                                    } else {
-                                                        $nilaiNormalisasi = 0;
-                                                    }
-                                                    
+    
+                    if ($ratingKriteria && ($maxValue - $minValue) != 0) {
+                        // Hitung nilai normalisasi
+                        $nilaiNormalisasi = ($ratingKriteria->nilai - $minValue) / ($maxValue - $minValue);
+                        $nilaiNormalisasi = max(0, $nilaiNormalisasi);
+                    } else {
+                        $nilaiNormalisasi = 0;
+                    }
     
                     // Simpan nilai normalisasi ke database
                     $normalisasi = new Normalisasi();
@@ -148,6 +161,5 @@ class NormalisasiController extends Controller
         }
     }
     
-
-    
 }
+                                

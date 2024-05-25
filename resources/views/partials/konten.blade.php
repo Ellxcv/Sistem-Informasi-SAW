@@ -61,7 +61,7 @@
                   </g>
                 </svg>
               </span>
-              <span class="app-brand-text demo menu-text fw-bolder ms-2">Sneat</span>
+              <span class="app-brand-text demo menu-text fw-bolder ms-2">Ell</span>
             </a>
 
             <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
@@ -86,15 +86,10 @@
             </li>
             <li class="menu-item">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-dock-top"></i>
+                <i class="menu-icon tf-icons bx bxs-user"></i>
                 <div data-i18n="Account Settings">Account Settings</div>
               </a>
               <ul class="menu-sub">
-                <li class="menu-item">
-                  <a href="pages-account-settings-account.html" class="menu-link">
-                    <div data-i18n="Account">Account</div>
-                  </a>
-                </li>
                 <li class="menu-item">
                   <a href="auth-login-basic.html" class="menu-link" target="_blank">
                     <div data-i18n="Basic">Login</div>
@@ -109,7 +104,7 @@
             </li>
             <li class="menu-item">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-lock-open-alt"></i>
+                <i class="menu-icon tf-icons bx bx-table"></i>
                 <div data-i18n="Authentications">Tabel</div>
               </a>
               <ul class="menu-sub">
@@ -191,82 +186,9 @@
                 <div data-i18n="Basic">Hasil SAW</div>
               </a>
             </li>
-            <li class="menu-item">
-              <a href="cards-basic.html" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-collection"></i>
-                <div data-i18n="Basic">Laporan</div>
-              </a>
-            </li>
               </ul>
             </li>
-            <!-- Forms & Tables -->
-            <li class="menu-header small text-uppercase"><span class="menu-header-text">Forms &amp; Tables</span></li>
-            <!-- Forms -->
-            <li class="menu-item">
-              <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-detail"></i>
-                <div data-i18n="Form Elements">Form Elements</div>
-              </a>
-              <ul class="menu-sub">
-                <li class="menu-item">
-                  <a href="forms-basic-inputs.html" class="menu-link">
-                    <div data-i18n="Basic Inputs">Basic Inputs</div>
-                  </a>
-                </li>
-                <li class="menu-item">
-                  <a href="forms-input-groups.html" class="menu-link">
-                    <div data-i18n="Input groups">Input groups</div>
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li class="menu-item">
-              <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-detail"></i>
-                <div data-i18n="Form Layouts">Form Layouts</div>
-              </a>
-              <ul class="menu-sub">
-                <li class="menu-item">
-                  <a href="form-layouts-vertical.html" class="menu-link">
-                    <div data-i18n="Vertical Form">Vertical Form</div>
-                  </a>
-                </li>
-                <li class="menu-item">
-                  <a href="form-layouts-horizontal.html" class="menu-link">
-                    <div data-i18n="Horizontal Form">Horizontal Form</div>
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <!-- Tables -->
-            <li class="menu-item">
-              <a href="tables-basic.html" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-table"></i>
-                <div data-i18n="Tables">Tables</div>
-              </a>
-            </li>
-            <!-- Misc -->
-            <li class="menu-header small text-uppercase"><span class="menu-header-text">Misc</span></li>
-            <li class="menu-item">
-              <a
-                href="https://github.com/themeselection/sneat-html-admin-template-free/issues"
-                target="_blank"
-                class="menu-link"
-              >
-                <i class="menu-icon tf-icons bx bx-support"></i>
-                <div data-i18n="Support">Support</div>
-              </a>
-            </li>
-            <li class="menu-item">
-              <a
-                href="https://themeselection.com/demo/sneat-bootstrap-html-admin-template/documentation/"
-                target="_blank"
-                class="menu-link"
-              >
-                <i class="menu-icon tf-icons bx bx-file"></i>
-                <div data-i18n="Documentation">Documentation</div>
-              </a>
-            </li>
+            
           </ul>
         </aside>
         <!-- / Menu -->
@@ -305,12 +227,12 @@
                 <li class="nav-item lh-1 me-3">
                   <a
                     class="github-button"
-                    href="https://github.com/themeselection/sneat-html-admin-template-free"
+                    href="https://github.com/Ellxcv/Sistem-Informasi-SAW"
                     data-icon="octicon-star"
                     data-size="large"
                     data-show-count="true"
                     aria-label="Star themeselection/sneat-html-admin-template-free on GitHub"
-                    >Star</a
+                    >Code</a
                   >
                 </li>
 
@@ -318,7 +240,7 @@
                 <li class="nav-item navbar-dropdown dropdown-user dropdown">
                   <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                     <div class="avatar avatar-online">
-                      <img src="{{asset('img/avatars/1.png')}}" alt class="w-px-40 h-auto rounded-circle" />
+                      <img src="{{asset('img/avatars/test.png')}}" alt class="w-px-40 h-auto rounded-circle" />
                     </div>
                   </a>
                   <ul class="dropdown-menu dropdown-menu-end">
@@ -327,11 +249,11 @@
                         <div class="d-flex">
                           <div class="flex-shrink-0 me-3">
                             <div class="avatar avatar-online">
-                              <img src="../assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
+                              <img src="../assets/img/avatars/test.png" alt class="w-px-40 h-auto rounded-circle" />
                             </div>
                           </div>
                           <div class="flex-grow-1">
-                            <span class="fw-semibold d-block">John Doe</span>
+                            <span class="fw-semibold d-block">Ell</span>
                             <small class="text-muted">Admin</small>
                           </div>
                         </div>
@@ -339,27 +261,6 @@
                     </li>
                     <li>
                       <div class="dropdown-divider"></div>
-                    </li>
-                    <li>
-                      <a class="dropdown-item" href="#">
-                        <i class="bx bx-user me-2"></i>
-                        <span class="align-middle">My Profile</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a class="dropdown-item" href="#">
-                        <i class="bx bx-cog me-2"></i>
-                        <span class="align-middle">Settings</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a class="dropdown-item" href="#">
-                        <span class="d-flex align-items-center align-middle">
-                          <i class="flex-shrink-0 bx bx-credit-card me-2"></i>
-                          <span class="flex-grow-1 align-middle">Billing</span>
-                          <span class="flex-shrink-0 badge badge-center rounded-pill bg-danger w-px-20 h-px-20">4</span>
-                        </span>
-                      </a>
                     </li>
                     <li>
                       <div class="dropdown-divider"></div>

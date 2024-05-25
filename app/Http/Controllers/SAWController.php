@@ -41,7 +41,7 @@ class SawController extends Controller
             return [
                 'nama_alternatif' => $alternatif->nama_alternatif,
                 'nilai' => $kriterias->map(function ($kriteria) use ($ratings, $alternatif) {
-                    $rating = $ratings->where('id_alternatif', $alternatif->id_alternatif)
+                    $rating = RatingKriteria::where('id_alternatif', $alternatif->id_alternatif)
                                       ->where('id_kriteria', $kriteria->id_kriteria)
                                       ->first();
                     return $rating ? (float)$rating->nilai : 0.0;
@@ -56,7 +56,7 @@ class SawController extends Controller
             return [
                 'nama_alternatif' => $alternatif->nama_alternatif,
                 'nilai' => $kriterias->map(function ($kriteria) use ($normalisasis, $alternatif) {
-                    $normalisasi = $normalisasis->where('id_alternatif', $alternatif->id_alternatif)
+                    $normalisasi = Normalisasi::where('id_alternatif', $alternatif->id_alternatif)
                                                 ->where('id_kriteria', $kriteria->id_kriteria)
                                                 ->first();
                     return $normalisasi ? (float)$normalisasi->nilai_normalisasi : 0.0;
@@ -68,7 +68,7 @@ class SawController extends Controller
     private function calculateSawResults($alternatifs, $kriterias, $normalisasis)
     {
         $sawResults = [];
-
+    
         foreach ($alternatifs as $alternatif) {
             $nilaiSaw = 0.0;
             foreach ($kriterias as $kriteria) {
@@ -78,22 +78,24 @@ class SawController extends Controller
                 if ($normalisasi) {
                     $bobot = $kriteria->bobot;
                     if (is_numeric($bobot) && is_numeric($normalisasi->nilai_normalisasi)) {
+                        // Hitung nilai SAW dengan mengalikan nilai normalisasi dengan bobot
                         $nilaiSaw += floatval($normalisasi->nilai_normalisasi) * floatval($bobot);
                     }
                 }
             }
+            // Simpan nilai SAW untuk alternatif saat ini
             $sawResults[] = [
                 'id_alternatif' => $alternatif->id_alternatif,
                 'nilai_saw' => $nilaiSaw
             ];
         }
-
-        // Sort SAW results
+    
+        // Urutkan hasil SAW secara descending
         usort($sawResults, function ($a, $b) {
             return $b['nilai_saw'] <=> $a['nilai_saw'];
         });
-
-        // Store SAW results in the database
+    
+        // Simpan hasil SAW ke dalam database
         DB::beginTransaction();
         try {
             SawResult::truncate();
@@ -105,7 +107,8 @@ class SawController extends Controller
             DB::rollBack();
             return redirect()->back()->with('error', 'Gagal menyimpan hasil perhitungan SAW.');
         }
-
+    
+        // Kembalikan hasil SAW
         return $sawResults;
     }
 

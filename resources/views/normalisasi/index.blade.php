@@ -5,7 +5,7 @@
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h2>Normalisasi List</h2>
             <a class="btn btn-success" href="{{ route('normalisasi.create') }}"> Create New Normalisasi</a>
-            <!-- Tombol untuk memicu perhitungan normalisasi -->
+            <!-- Form to trigger normalisasi calculation -->
             <form action="{{ route('hitung-normalisasi') }}" method="POST">
                 @csrf
                 <button type="submit" class="btn btn-primary">Hitung Normalisasi</button>
@@ -16,22 +16,22 @@
             <p>{{ $message }}</p>
         </div>
         @endif
-        <!-- Tabel untuk menampilkan data normalisasi -->
+        <!-- Table to display normalisasi data -->
         <table class="table table-bordered">
-            <!-- Judul kolom -->
+            <!-- Column headers -->
             <tr>
                 <th>No</th>
                 <th>Alternatif</th>
                 <th>Kriteria</th>
                 <th>Nilai Normalisasi
-                    <!-- Tombol untuk pengurutan -->
+                    <!-- Button for sorting -->
                     <button type="button" class="btn btn-icon btn-outline-secondary" onclick="sortData('nilai_normalisasi')">
                         <span class="tf-icons bx bx-sort"></span>
                     </button>
                 </th>
                 <th width="280px">Action</th>
             </tr>
-            <!-- Data normalisasi -->
+            <!-- Normalisasi data -->
             @php $i = 1; @endphp
             @foreach ($normalisasis as $normalisasi)
             <tr>
@@ -40,7 +40,7 @@
                 <td>{{ $normalisasi->kriteria->nama_kriteria }}</td>
                 <td>{{ $normalisasi->nilai_normalisasi }}</td>
                 <td>
-                    <!-- Tombol untuk mengedit dan menghapus normalisasi -->
+                    <!-- Buttons to edit and delete normalisasi -->
                     <form action="{{ route('normalisasi.destroy', $normalisasi->id_normalisasi) }}" method="POST">
                         <a class="btn btn-primary" href="{{ route('normalisasi.edit', $normalisasi->id_normalisasi) }}">Edit</a>
                         @csrf
@@ -88,26 +88,27 @@
                 <li><a class="dropdown-item" href="#" onclick="changePageSize(5)">5</a></li>
                 <li><a class="dropdown-item" href="#" onclick="changePageSize(7)">7</a></li>
                 <li><a class="dropdown-item" href="#" onclick="changePageSize(10)">10</a></li>
-            </ul>
-        </div>
-    </div>
-<script>
-    let sortDirection = 'asc'; // Default pengurutan adalah ascending
+</ul>
+</div>
+</div>
 
-    // Cek apakah data awal diurutkan secara descending
+<script>
+    let sortDirection = 'asc'; // Default sorting direction is ascending
+
+    // Check if initial data is sorted in descending order
     @if(request()->has('orderDirection') && request('orderDirection') === 'desc')
         sortDirection = 'desc';
     @endif
 
     function sortData(column) {
-        // Toggle arah pengurutan
+        // Toggle sorting direction
         sortDirection = sortDirection === 'asc' ? 'desc' : 'asc';
-        // Kirim permintaan ke server untuk pengurrutan
-    window.location.href = {{ route('normalisasi.index') }}?orderBy=${column}&orderDirection=${sortDirection};
+        // Send request to the server for sorting
+        window.location.href = "{{ route('normalisasi.index') }}?orderBy=" + column + "&orderDirection=" + sortDirection;
     }
-    function changePageSize(size) {
-    window.location.href = "{{ route('normalisasi.index') }}?pageSize=" + size;
-    }
-    </script>
-@endsection
 
+    function changePageSize(size) {
+        window.location.href = "{{ route('normalisasi.index') }}?pageSize=" + size;
+    }
+</script>
+@endsection
